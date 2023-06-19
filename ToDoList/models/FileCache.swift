@@ -1,17 +1,17 @@
 import Foundation
 
-struct FileCache {
+final class FileCache {
     private(set) var toDoListItems: [String: ToDoItem]
 
     init(dict: [String: ToDoItem]) {
         toDoListItems = dict
     }
 
-    init() {
+    convenience init() {
         self.init(dict: [:])
     }
 
-    mutating func AddItem(ItemToAdd task: ToDoItem) {
+    func AddItem(ItemToAdd task: ToDoItem) {
         if toDoListItems[task.id] != nil {
             toDoListItems[task.id] = task
         } else {
@@ -19,7 +19,7 @@ struct FileCache {
         }
     }
 
-    mutating func DeleteItem(id: String) {
+    func DeleteItem(id: String) {
         if toDoListItems[id] != nil {
             toDoListItems.removeValue(forKey: id)
         } else {
@@ -27,7 +27,7 @@ struct FileCache {
         }
     }
 
-    mutating func LoadFromJSOn(filepath: String) -> Int? {
+    func LoadFromJSOn(filepath: String) -> Int? {
         var d: Data?
         do {
             d = try Data(contentsOf: URL(filePath: filepath))
@@ -67,7 +67,7 @@ struct FileCache {
         return addedCont
     }
 
-    mutating func WriteToJSON(NameOfJSON name: String) -> Int? {
+    func WriteToJSON(NameOfJSON name: String) -> Int? {
         let path_dir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("ToDoItems_JSONs", isDirectory: true)
         if !FileManager.default.fileExists(atPath: path_dir.path) {
             do {
