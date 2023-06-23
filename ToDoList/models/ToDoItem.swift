@@ -14,6 +14,27 @@ struct ToDoItem {
     let isDone: Bool
     let createDate: Date
     let changeDate: Date?
+
+    init(
+        id: String = UUID().uuidString,
+        text: String,
+        priority: Priority = .ordinary,
+        deadline: Date? = nil,
+        isDone: Bool,
+        createDate: Date = Date(),
+        changeDate: Date? = nil
+    ) {
+        self.id = id
+        self.text = text
+        self.priority = priority
+        self.deadline = deadline
+        self.isDone = isDone
+        self.createDate = createDate
+        self.changeDate = changeDate
+    }
+}
+
+extension ToDoItem {
     init?(dict: [String: Any]) {
         id = dict["id"] as? String ?? UUID().uuidString
         guard let txt = dict["text"] as? String else {
@@ -34,26 +55,13 @@ struct ToDoItem {
             changeDate = nil
         }
     }
-}
 
-extension ToDoItem {
     static func parse(json: Any) -> ToDoItem? {
-        guard let data = json as? Data else {
+        guard let data = json as? [String: Any] else {
             print("Error json not a Data object")
             return nil
         }
-        var dictonary: [String: Any] = [:]
-        do {
-            guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                print("JSONSerialization failed")
-                return nil
-            }
-            dictonary = dict
-        } catch {
-            print("JSON parsing error")
-            return nil
-        }
-        return ToDoItem(dict: dictonary)
+        return ToDoItem(dict: data)
     }
 
     func getPropertyDict() -> [String: Any] {
@@ -75,14 +83,6 @@ extension ToDoItem {
     }
 
     var json: Any {
-        let dict = getPropertyDict()
-        var json = Data()
-        do {
-            json = try JSONSerialization.data(withJSONObject: dict)
-        } catch {
-            print("Error can not create json")
-            return ""
-        }
-        return json
+        getPropertyDict()
     }
 }

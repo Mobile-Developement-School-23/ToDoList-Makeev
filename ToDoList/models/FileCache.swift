@@ -12,47 +12,23 @@ final class FileCache {
     }
 
     func AddItem(ItemToAdd task: ToDoItem) {
-        if toDoListItems[task.id] != nil {
-            toDoListItems[task.id] = task
-        } else {
-            toDoListItems[task.id] = task
-        }
+        toDoListItems[task.id] = task
     }
 
-    func DeleteItem(id: String) {
-        if toDoListItems[id] != nil {
-            toDoListItems.removeValue(forKey: id)
-        } else {
-            print("Task list has not item with id: \(id)")
-        }
+    func DeleteItem(id: String) -> ToDoItem? {
+        toDoListItems.removeValue(forKey: id)
     }
 
-    func LoadFromJSOn(filepath: String) -> Int? {
-        var d: Data?
-        do {
-            d = try Data(contentsOf: URL(filePath: filepath))
-        } catch {
-            print("Error: not file with path \(filepath)")
-            return nil
-        }
-
-        guard let data = d else {
-            return nil
-        }
-
+    func LoadFromJSOn(filename: String) throws -> Int? {
+        let path_dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let json_dir = path_dir.appendingPathComponent("\(filename).json")
+        let data = try Data(contentsOf: json_dir)
         var dict: [String: Any] = [:]
-        do {
-            guard let dictonary = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                print("unexpectod json structure")
-                return nil
-            }
-            dict = dictonary
-
-        } catch {
-            print("JSON parsing error")
+        guard let dictonary = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            print("unexpectod json structure")
             return nil
         }
-
+        dict = dictonary
         guard let toDoItemArray = dict["toDoItemArray"] as? [[String: Any]] else {
             print("unexpectod json structure")
             return nil
@@ -68,21 +44,15 @@ final class FileCache {
     }
 
     func WriteToJSON(NameOfJSON name: String) -> Int? {
-        let path_dir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("ToDoItems_JSONs", isDirectory: true)
-        if !FileManager.default.fileExists(atPath: path_dir.path) {
-            do {
-                try FileManager.default.createDirectory(atPath: path_dir.path, withIntermediateDirectories: true)
-            } catch {
-                print("Error creating directory")
-                return nil
-            }
+        let path_dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let json_dir = path_dir.appendingPathComponent("\(name).json")
+        if !FileManager.default.fileExists(atPath: json_dir.path) {
+            FileManager.default.createFile(atPath: json_dir.path, contents: nil)
         }
-
-        let json_dir = path_dir.appendingPathComponent(name)
         print(json_dir)
-        var dictarray: [[String: Any]] = []
+        var dictarray: [Any] = []
         for task in toDoListItems.values {
-            dictarray.append(task.getPropertyDict())
+            dictarray.append(task.json)
         }
         let dict = ["toDoItemArray": dictarray]
         guard let ostream = OutputStream(url: json_dir, append: false) else {
