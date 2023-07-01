@@ -1,4 +1,3 @@
-
 import UIKit
 
 class ToDoItemAddScreen: UIViewController {
@@ -39,14 +38,11 @@ class ToDoItemAddScreen: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .backPrimary
-
         lazy var cancelButton: UIBarButtonItem = {
             let cbutton = UIBarButtonItem(title: "Отмена", image: nil, target: nil, action: nil)
             return cbutton
         }()
-
         lazy var saveButton: UIBarButtonItem = {
             let sbutton = UIBarButtonItem(
                 title: "Сохранить", style: .plain, target: nil, action: nil
@@ -54,7 +50,6 @@ class ToDoItemAddScreen: UIViewController {
 
             return sbutton
         }()
-
         scrView.translatesAutoresizingMaskIntoConstraints = false
         scrViewVS.translatesAutoresizingMaskIntoConstraints = false
         txtField.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +72,7 @@ class ToDoItemAddScreen: UIViewController {
             scrViewVS.trailingAnchor.constraint(equalTo: scrView.frameLayoutGuide.trailingAnchor, constant: -16),
 
             txtField.heightAnchor.constraint(greaterThanOrEqualToConstant: textViewMaxHeight),
-            txtField.bottomAnchor.constraint(equalTo: scrView.bottomAnchor, constant: -16),
+            txtField.bottomAnchor.constraint(equalTo: scrView.bottomAnchor, constant: -16)
 
         ])
 
@@ -87,17 +82,17 @@ class ToDoItemAddScreen: UIViewController {
 
         let saveAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.headLine ?? UIFont.systemFont(ofSize: 17),
-            .foregroundColor: UIColor.colorBlue,
+            .foregroundColor: UIColor.colorBlue
         ]
         let cancelAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.body ?? UIFont.systemFont(ofSize: 17),
-            .foregroundColor: UIColor.colorBlue,
+            .foregroundColor: UIColor.colorBlue
         ]
 
         title = "Дело"
         let titleAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.headLine ?? UIFont.systemFont(ofSize: 17),
-            .foregroundColor: UIColor.labelPrimery,
+            .foregroundColor: UIColor.labelPrimery
         ]
         navigationController?.navigationBar.titleTextAttributes = titleAttributes
         navigationItem.rightBarButtonItem = saveButton
