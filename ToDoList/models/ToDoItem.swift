@@ -1,3 +1,4 @@
+import CocoaLumberjackSwift
 import Foundation
 
 enum Priority: String {
@@ -58,6 +59,7 @@ extension ToDoItem {
 
     static func parse(json: Any) -> ToDoItem? {
         guard let data = json as? [String: Any] else {
+            DDLogError("Error json not a Data object")
             print("Error json not a Data object")
             return nil
         }

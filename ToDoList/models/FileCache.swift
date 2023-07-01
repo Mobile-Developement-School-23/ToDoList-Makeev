@@ -1,6 +1,8 @@
+import CocoaLumberjackSwift
 import Foundation
 
 final class FileCache {
+    let consoleLogger = DDOSLogger.sharedInstance
     private(set) var toDoListItems: [String: ToDoItem]
 
     init(dict: [String: ToDoItem]) {
@@ -11,25 +13,27 @@ final class FileCache {
         self.init(dict: [:])
     }
 
-    func AddItem(ItemToAdd task: ToDoItem) {
+    func addItem(ItemToAdd task: ToDoItem) {
         toDoListItems[task.id] = task
     }
 
-    func DeleteItem(id: String) -> ToDoItem? {
+    func deleteItem(id: String) -> ToDoItem? {
         toDoListItems.removeValue(forKey: id)
     }
 
-    func LoadFromJSOn(filename: String) throws -> Int? {
-        let path_dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let json_dir = path_dir.appendingPathComponent("\(filename).json")
-        let data = try Data(contentsOf: json_dir)
+    func loadFromJSOn(filename: String) throws -> Int? {
+        let pathDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let jsonDir = pathDir.appendingPathComponent("\(filename).json")
+        let data = try Data(contentsOf: jsonDir)
         var dict: [String: Any] = [:]
         guard let dictonary = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            DDLogError("unexpectod json structure")
             print("unexpectod json structure")
             return nil
         }
         dict = dictonary
         guard let toDoItemArray = dict["toDoItemArray"] as? [[String: Any]] else {
+            DDLogError("unexpectod json structure ")
             print("unexpectod json structure")
             return nil
         }
@@ -37,33 +41,36 @@ final class FileCache {
         for dict in toDoItemArray {
             if let item = ToDoItem(dict: dict) {
                 addedCont += 1
-                AddItem(ItemToAdd: item)
+                addItem(ItemToAdd: item)
             }
         }
+        DDLogDebug("Load succsesfull")
         return addedCont
     }
 
-    func WriteToJSON(NameOfJSON name: String) -> Int? {
-        let path_dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let json_dir = path_dir.appendingPathComponent("\(name).json")
-        if !FileManager.default.fileExists(atPath: json_dir.path) {
-            FileManager.default.createFile(atPath: json_dir.path, contents: nil)
+    func writeToJSON(NameOfJSON name: String) -> Int? {
+        let pathDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let jsonDir = pathDir.appendingPathComponent("\(name).json")
+        if !FileManager.default.fileExists(atPath: jsonDir.path) {
+            FileManager.default.createFile(atPath: jsonDir.path, contents: nil)
         }
-        print(json_dir)
+        print(jsonDir)
         var dictarray: [Any] = []
         for task in toDoListItems.values {
             dictarray.append(task.json)
         }
         let dict = ["toDoItemArray": dictarray]
-        guard let ostream = OutputStream(url: json_dir, append: false) else {
+        guard let ostream = OutputStream(url: jsonDir, append: false) else {
             fatalError("Cannot open file")
         }
         ostream.open()
         let res = JSONSerialization.writeJSONObject(dict, to: ostream, error: nil)
         if res == 0 {
+            DDLogError("writing to file error")
             print("writing to file error")
             return (nil)
         }
+        DDLogDebug("write succsesfull")
         return dictarray.count
     }
 }
