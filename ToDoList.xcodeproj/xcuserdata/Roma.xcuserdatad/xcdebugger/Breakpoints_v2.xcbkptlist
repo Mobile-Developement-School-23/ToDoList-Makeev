@@ -18,6 +18,38 @@
             endingLineNumber = "5"
             landmarkName = "FileCache"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "794A0926-6EF5-4D8F-85FF-A3ACE92C03D5 - 6a21c50304a2227f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.FileCache.init(dict: Swift.Dictionary&lt;Swift.String, ToDoList.ToDoItem&gt;) -&gt; ToDoList.FileCache"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Roma/Apss/ToDoList/ToDoList/models/FileCache.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "794A0926-6EF5-4D8F-85FF-A3ACE92C03D5 - 6a21c50304a2227f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoList.FileCache.init(dict: Swift.Dictionary&lt;Swift.String, ToDoList.ToDoItem&gt;) -&gt; ToDoList.FileCache"
+                  moduleName = "ToDoList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Roma/Apss/ToDoList/ToDoList/models/FileCache.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "5"
+                  endingLineNumber = "5"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
