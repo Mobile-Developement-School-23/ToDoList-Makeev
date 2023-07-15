@@ -56,6 +56,23 @@ extension ToDoItem {
             changeDate = nil
         }
     }
+    init(dbTask: DBToDoItem) {
+        id = dbTask.id
+        text = dbTask.text
+        priority = Priority(rawValue: dbTask.priority) ?? Priority.ordinary
+        if let ddLine = dbTask.deadline {
+            deadline = Date(timeIntervalSince1970: ddLine)
+        } else {
+            deadline = nil
+        }
+        isDone = dbTask.isDone
+        createDate = Date(timeIntervalSince1970: dbTask.createDate)
+        if let chDate = dbTask.changeDate {
+            changeDate = Date(timeIntervalSince1970: chDate)
+        } else {
+            changeDate = nil
+        }
+    }
 
     static func parse(json: Any) -> ToDoItem? {
         guard let data = json as? [String: Any] else {
