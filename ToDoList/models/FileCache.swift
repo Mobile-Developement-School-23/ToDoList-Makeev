@@ -3,6 +3,7 @@ import Foundation
 
 final class FileCache {
     let consoleLogger = DDOSLogger.sharedInstance
+    let dbM = DBManager()
     private(set) var toDoListItems: [String: ToDoItem]
 
     init(dict: [String: ToDoItem]) {
@@ -72,5 +73,13 @@ final class FileCache {
         }
         DDLogDebug("write succsesfull")
         return dictarray.count
+    }
+    func loadFromDB() -> [ToDoItem] {
+        return dbM.getTasks()
+    }
+    func saveToDB() {
+        for task in toDoListItems.values {
+            dbM.addTask(task: task)
+        }
     }
 }
