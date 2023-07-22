@@ -35,6 +35,9 @@
 		E0A8B9AD2A3D31A300AA6F62 /* ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A8B9AC2A3D31A300AA6F62 /* ToDoListTests.swift */; };
 		E0A8B9B72A3D31A300AA6F62 /* ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A8B9B62A3D31A300AA6F62 /* ToDoListUITests.swift */; };
 		E0A8B9B92A3D31A300AA6F62 /* ToDoListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A8B9B82A3D31A300AA6F62 /* ToDoListUITestsLaunchTests.swift */; };
+		E0C4D6B52A6B3B4600B48003 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C4D6B42A6B3B4600B48003 /* TaskList.swift */; };
+		E0C4D6B72A6B3F1C00B48003 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C4D6B62A6B3F1C00B48003 /* ColorExtension.swift */; };
+		E0C4D6B92A6B576000B48003 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C4D6B82A6B576000B48003 /* TaskRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +93,9 @@
 		E0A8B9B22A3D31A300AA6F62 /* ToDoListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0A8B9B62A3D31A300AA6F62 /* ToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListUITests.swift; sourceTree = "<group>"; };
 		E0A8B9B82A3D31A300AA6F62 /* ToDoListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E0C4D6B42A6B3B4600B48003 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		E0C4D6B62A6B3F1C00B48003 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		E0C4D6B82A6B576000B48003 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +167,7 @@
 				E09C5D512A4F16EF00EAAB44 /* UIColorExtension.swift */,
 				E09C5D532A4F170B00EAAB44 /* UIFontsExtension.swift */,
 				E02E711B2A58BF6000D35C76 /* URLSessionExtension.swift */,
+				E0C4D6B62A6B3F1C00B48003 /* ColorExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -202,6 +209,7 @@
 		E0A8B9942A3D31A100AA6F62 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				E0C4D6B32A6B3B2F00B48003 /* SwiftUI */,
 				E09C5D562A4F279700EAAB44 /* Fonts */,
 				E09C5D502A4F16DA00EAAB44 /* Extension */,
 				E09C5D392A45E87100EAAB44 /* ToDoItemCreationScreen */,
@@ -243,6 +251,15 @@
 				E07A9F172A621D50000285CA /* DBManager.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		E0C4D6B32A6B3B2F00B48003 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				E0C4D6B42A6B3B4600B48003 /* TaskList.swift */,
+				E0C4D6B82A6B576000B48003 /* TaskRow.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -480,10 +497,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0C4D6B52A6B3B4600B48003 /* TaskList.swift in Sources */,
 				E0A8B99A2A3D31A100AA6F62 /* ViewController.swift in Sources */,
 				E0A8B9962A3D31A100AA6F62 /* AppDelegate.swift in Sources */,
 				E02E71192A5873FB00D35C76 /* FileCache.swift in Sources */,
 				E09C5D542A4F170B00EAAB44 /* UIFontsExtension.swift in Sources */,
+				E0C4D6B92A6B576000B48003 /* TaskRow.swift in Sources */,
 				E09C5D522A4F16EF00EAAB44 /* UIColorExtension.swift in Sources */,
 				E07A9F182A621D50000285CA /* DBManager.swift in Sources */,
 				E07A9F1C2A62248B000285CA /* DBToDoItem.swift in Sources */,
@@ -491,6 +510,7 @@
 				E0A8B9982A3D31A100AA6F62 /* SceneDelegate.swift in Sources */,
 				E02E711A2A5873FB00D35C76 /* ToDoItem.swift in Sources */,
 				E09C5D3B2A45E8C600EAAB44 /* ToDoItemAddScreen.swift in Sources */,
+				E0C4D6B72A6B3F1C00B48003 /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
